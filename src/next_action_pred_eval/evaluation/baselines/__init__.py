@@ -35,11 +35,6 @@ try:
 except ImportError:
     pass
 
-try:
-    from next_action_pred_eval.evaluation.baselines.lstm_solver import LSTMSolver
-except ImportError:
-    pass
-
 __all__ = [
     "BaseLLMSolver",
     "ChatSolver",

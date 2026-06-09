@@ -85,13 +85,37 @@ Each `data/trajectories/<id>.json` looks like:
 
 ## Solvers
 
-Built-in solvers (`src/next_action_pred_eval/evaluation/`):
+Built-in solvers (`src/next_action_pred_eval/evaluation/`). Any class that
+implements the `ISolver` interface
+([`evaluation/solver.py`](src/next_action_pred_eval/evaluation/solver.py))
+can be evaluated. The repo ships three families:
 
-| Solver | What it does |
-|---|---|
-| `ConstantSolver` | Predicts nothing — useful as a no-skill baseline |
-| `ChatSolver` | Calls an LLM in chat mode with a system + user prompt |
-| `CompletionSolver` | Calls an LLM in completion mode (raw prompt → continuation) |
+**LLM solvers** (`evaluation/baselines/`):
+
+| Solver | `type` | What it does |
+|---|---|---|
+| `ConstantSolver` | `constant` | Predicts nothing — a no-skill baseline |
+| `ChatSolver` | `chat` (or `llm`) | Calls an LLM in chat mode with a system + user prompt |
+| `CompletionSolver` | `completion` | Calls an LLM in completion mode (raw prompt → continuation) |
+
+**Classical sequence solvers** (non-LLM, trained on operation sequences):
+
+| Solver | `type` | What it does |
+|---|---|---|
+| `NGramSolver` | `ngram` | Back-off n-gram frequency model |
+| `OnlineNGramSolver` | `online_ngram` | Suffix-match model that learns within a single trajectory (no training) |
+| `LSTMSolver` | `lstm` | Small GRU sequence model (needs `torch`) |
+| `XGBoostSolver` | `xgboost` | Gradient-boosted next-op predictor (needs `xgboost`) |
+
+The classical solvers share a common featurizer
+(`evaluation/baselines/featurizer.py`) and decoding loop. Training scripts
+for the LSTM and XGBoost models live in
+[`examples/baselines/`](examples/baselines/). The n-gram and online n-gram
+solvers need no separate training step.
+
+Select a solver in YAML via the `solver.type` field — see
+[`configs/evaluation/base_run_repredict.yaml`](configs/evaluation/base_run_repredict.yaml)
+for the single-action protocol used with the smaller solvers.
 
 ### Plugging in your own LLM provider
 
