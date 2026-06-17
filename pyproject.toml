@@ -67,6 +67,7 @@ dev = [
 Homepage = "https://github.com/Tej-55/NAPE"
 Documentation = "https://github.com/Tej-55/NAPE#readme"
 Repository = "https://github.com/Tej-55/NAPE"
+"Project page" = "https://napeval.github.io"
 
 [tool.setuptools.packages.find]
 where = ["src"]

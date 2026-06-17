@@ -1,5 +1,7 @@
 # next_action_pred_eval
 
+**[🌐 Project page & live demo](https://napeval.github.io)** &nbsp;·&nbsp; **[📄 Paper (arXiv)](https://arxiv.org/abs/2606.13802)**
+
 Benchmark and evaluation framework for **predictive auto-completion in spreadsheets**. Given a user's editing history (a sequence of symbolic cell operations), the framework asks a solver to predict the next operation(s) the user is likely to perform, and grades the prediction by comparing the resulting workbook **state** against ground truth — not the raw operation strings.
 
 ## Why state-level evaluation?
@@ -189,4 +191,15 @@ commercial licensing.
 
 ## Citation
 
-> TBD — paper link will be added once the publication is finalised.
+If you use this benchmark or framework, please cite:
+
+```bibtex
+@inproceedings{agrawal2026nape,
+  title     = {A Benchmark and Framework for Evaluating Next Action Predictions in Spreadsheets},
+  author    = {Agrawal, Tejas and Le, Vu and Gulwani, Sumit and Verbruggen, Gust},
+  booktitle = {Proceedings of the 43rd International Conference on Machine Learning (ICML)},
+  year      = {2026}
+}
+```
+
+Preprint: [arXiv:2606.13802](https://arxiv.org/abs/2606.13802)
